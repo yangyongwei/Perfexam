@@ -6,12 +6,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-/**
- * 自定义身份验证类（用于重写WebSecurityConfigurerAdapter默认配置）
- * @Configuration     表示这是一个配置类
- * @EnableWebSecurity    允许security
- * configure()     该方法重写了父类的方法，用于添加用户与角色
- * */
 @Configuration
 @EnableWebSecurity
 public class AuthConfig extends WebSecurityConfigurerAdapter {
@@ -21,6 +15,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
      * */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println("Good Luck");
         auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .withUser("admin").password("admin").roles("ADMIN")
                 .and()
