@@ -19,8 +19,8 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .withUser("admin").password("admin").roles("ADMIN")
                 .and()
-                .withUser("terry").password("terry").roles("USER")
+                .withUser("terry").password("terry").roles("USER1")
                 .and()
-                .withUser("larry").password("larry").roles("USER");
+                .withUser("larry").password("larry").roles("USER2");
     }
 }
