@@ -27,11 +27,13 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/css/**", "/index").permitAll()
                 .antMatchers("/orders/**").hasRole("USER")    //用户权限
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")    //跳转登录页面的控制器，该地址要保证和表单提交的地址一致！
+                .failureUrl("/login-error")
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication arg2)

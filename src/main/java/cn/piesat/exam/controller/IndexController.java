@@ -17,4 +17,9 @@ public class IndexController {
         }
         return "login";
     }
+    @RequestMapping("/")
+    public String root() {
+        return "redirect:/login";
+    }
+
 }
