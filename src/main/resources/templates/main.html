@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>larger5</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}"/>
+</head>
+<style type="text/css">
+    body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+
+    .data_list {
+        border: 1px solid #E5E5E5;
+        padding: 10px;
+        background-color: #FDFDFD;
+        margin-top: 15px;
+    }
+
+    .data_list .data_list_title {
+        font-size: 15px;
+        font-weight: bold;
+        border-bottom: 1px solid #E5E5E5;
+        padding-bottom: 10px;
+        padding-top: 5px;
+    }
+
+    .data_list .data_list_title img {
+        vertical-align: top;
+    }
+</style>
+
+<body>
+<!--导航条浮动，固定在上方，不会随着滚动条滑下而消失-->
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <!--标题，字体稍微大点-->
+            <a class="brand" href="#">larger5</a>
+            <!--导航条具有响应式功能，主要是在屏幕较小的设备也能用-->
+            <div class="nav-collapse">
+                <!--导航标签，H5就有了-->
+                <ul class="nav">
+                    <li>
+                        <a href="#"><i class="icon-home"></i>&nbsp;主页</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-pencil"></i>&nbsp;写博文</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-book"></i>&nbsp;分类管理</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="icon-user"></i>&nbsp;个人中心</a>
+                    </li>
+                </ul>
+            </div>
+            <!--导航条内的表单，居右-->
+            <form name="myForm" class="navbar-form pull-right" method="post" action="">
+                <input class="span2" id="s_title" name="s_title" type="text" style="margin-top:5px;height:30px;"
+                       placeholder="文章标题">
+                <button type="submit" class="btn" onkeydown="if(event.keyCode==13) myForm.submit()"><i
+                        class="icon-search"></i>&nbsp;搜索
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!--流式，按百分比分列-->
+    <div class="row-fluid">
+        <div class="span9">
+            <!--这里的内容经常会变化-->
+            <div class="data_list">
+                <div class="data_list_title">
+                    <img src="images/list_icon.png"/> 最新资讯
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="data_list">
+                <div class="data_list_title">
+                    <img src="images/user_icon.png"/> 个人中心
+                </div>
+            </div>
+
+            <div class="data_list">
+                <div class="data_list_title">
+                    <img src="images/byType_icon.png"/> 按类别
+                </div>
+            </div>
+
+            <div class="data_list">
+                <div class="data_list_title">
+                    <img src="images/byDate_icon.png"/> 按日期
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

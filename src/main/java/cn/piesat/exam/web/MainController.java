@@ -46,6 +46,11 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping("/main")
+    public String mainPage() {
+        return "main";
+    }
+
     @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
