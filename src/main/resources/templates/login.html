@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-          href="../../css/bootstrap.min.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
 </head>
 <body onload="document.f.username.focus();">
 <div class="container">
@@ -22,13 +27,18 @@
         <h2>Login with Username and Password</h2>
         <form name="form" th:action="@{/login}" action="/login" method="POST">
             <fieldset>
-                <input type="text" name="username" value="" placeholder="Username" />
-                <input type="password" name="password" placeholder="Password" />
+                <input type="text" name="username" value="" placeholder="Username"/>
+                <input type="password" name="password" placeholder="Password"/>
             </fieldset>
             <input type="submit" id="login" value="Login"
-                   class="btn btn-primary" />
+                   class="btn btn-primary"/>
         </form>
     </div>
 </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script th:src="@{/js/jquery-3.3.1.slim.min.js"}></script>
+<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
