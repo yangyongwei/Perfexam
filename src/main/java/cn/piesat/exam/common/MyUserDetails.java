@@ -4,12 +4,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * 自定义用户身份信息
- * */
-public class MyUserDetails implements UserDetails {
+ */
+public class MyUserDetails implements UserDetails, Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     // 用户信息
     private User user;
     // 用户角色
@@ -20,11 +25,6 @@ public class MyUserDetails implements UserDetails {
         this.user = user;
         this.authorities = authorities;
     }
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,4 +60,5 @@ public class MyUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
-    }}
+    }
+}
