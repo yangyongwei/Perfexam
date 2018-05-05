@@ -5,9 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class Employee {
+public class Role {
     private Integer id;
     private String name;
-    private String password;
-    private String phone;
 }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{/bootstrap/css/fontawesome-all.min.css}"/>
 
 </head>
-<body onload="document.f.username.focus();">
+<body>
 <div class="container">
     <div class="navbar">
         <div class="navbar-inner">
@@ -24,7 +24,7 @@
     </div>
     <div class="content">
         <p th:if="${param.logout}" class="alert">You have been logged out</p>
-        <p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>
+        <p th:if="${param.error}" class="alert alert-warning">There was an error, please try again</p>
         <h2>Login with Username and Password</h2>
         <form name="form" th:action="@{/login}" action="/login" method="POST">
             <fieldset>

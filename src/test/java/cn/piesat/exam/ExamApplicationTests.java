@@ -1,7 +1,7 @@
 package cn.piesat.exam;
 
-import cn.piesat.exam.domain.Employee;
-import cn.piesat.exam.mapper.EmployeeMapper;
+import cn.piesat.exam.domain.User;
+import cn.piesat.exam.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ExamApplicationTests {
 
     @Autowired
-    private EmployeeMapper employeeMapper;
+    private UserMapper userMapper;
     @Test
     public void contextLoads() {
-        Employee e = employeeMapper.findEmployeeById(7);
-        Assert.assertEquals("admin",e.getName());
+        User e = userMapper.findUserById(7);
+        Assert.assertEquals("系统管理员",e.getName());
     }
 
 }
