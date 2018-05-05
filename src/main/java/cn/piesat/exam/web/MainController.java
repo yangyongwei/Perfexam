@@ -28,7 +28,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String root() {
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     @RequestMapping("/index")
@@ -36,10 +36,10 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/user/index")
-    public String userIndex() {
-        return "user/index";
-    }
+//    @RequestMapping("/user/index")
+//    public String userIndex() {
+//        return "user/index";
+//    }
 
     @RequestMapping("/login")
     public String login() {
@@ -54,7 +54,7 @@ public class MainController {
     @RequestMapping("/login?error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "login";
+        return "index";
     }
 
 }

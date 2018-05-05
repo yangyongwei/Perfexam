@@ -38,6 +38,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/index").permitAll()
                 .antMatchers("/orders/**").hasRole("管理员")    //用户权限
+                .antMatchers("/main").hasRole("管理员")    //用户权限
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
@@ -68,6 +69,8 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll()
+                .and()
+                .rememberMe()
                 .and()
                 .csrf().disable();        //暂时禁用CSRF，否则无法提交表单
 

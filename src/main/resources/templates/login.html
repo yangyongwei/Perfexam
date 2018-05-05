@@ -1,50 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Login</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/bootstrap/css/fontawesome-all.min.css}"/>
-
+    <title>Login page</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div class="container">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand" href="http://www.thymeleaf.org"> Thymeleaf -
-                Plain </a>
-            <ul class="nav">
-                <li><a th:href="@{/}" href="home.html"> Home </a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="content">
-        <p th:if="${param.logout}" class="alert">You have been logged out</p>
-        <p th:if="${param.error}" class="alert alert-warning">There was an error, please try again</p>
-        <h2>Login with Username and Password</h2>
-        <form name="form" th:action="@{/login}" action="/login" method="POST">
-            <fieldset>
-                <input type="text" name="username" value="" placeholder="Username"/>
-                <input type="password" name="password" placeholder="Password"/>
-            </fieldset>
-            <input type="submit" id="login" value="Login"
-                   class="btn btn-primary"/>
-            <div style="font-size:3em; color:Tomato">
-                <i class="fas fa-camera-retro"></i>
-                <i class="far fa-arrow-alt-circle-left"></i>
-            </div>
-
-        </form>
-    </div>
-</div>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
-<script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<h1>Login page</h1>
+<p>Example user: user / password</p>
+<p th:if="${loginError}" class="error">Wrong user or password</p>
+<form th:action="@{/login}" method="post">
+    <label for="username">Username</label>:
+    <input type="text" id="username" name="username" autofocus="autofocus"/> <br/>
+    <label for="password">Password</label>:
+    <input type="password" id="password" name="password"/> <br/>
+    <input type="checkbox" name="remember-me"/> Remember me<br/>
+    <input type="submit" value="Log in"/>
+</form>
+<p><a href="/index" th:href="@{/index}">Back to home page</a></p>
 </body>
 </html>
