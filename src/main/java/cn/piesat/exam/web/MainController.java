@@ -16,6 +16,8 @@ package cn.piesat.exam.web;
  * limitations under the License.
  */
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,13 +50,17 @@ public class MainController {
 
     @RequestMapping("/main")
     public String mainPage() {
-        return "main";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getAuthorities().toString().equals("[ROLE_组长]"))
+            return "index";//如果是客户登录
+        else
+            return "main";//如果是后台管理人员登录
     }
 
     @RequestMapping("/login?error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "index";
+        return "login";
     }
 
 }

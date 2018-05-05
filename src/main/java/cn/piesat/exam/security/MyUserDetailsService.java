@@ -35,7 +35,7 @@ public class MyUserDetailsService implements UserDetailsService {
         User user = userService.findByUsername(username);
 
         // 判断用户是否存在
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
 
@@ -44,7 +44,7 @@ public class MyUserDetailsService implements UserDetailsService {
         Role role = roleService.findById(userRole.getRoleId());
         authorities.add(new SimpleGrantedAuthority(role.getName()));
         user.setAuthorities(authorities);
-        System.out.println(user.toString());
+        System.out.println("OOO" + user.toString());
         return user;
     }
 }

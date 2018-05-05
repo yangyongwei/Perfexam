@@ -7,18 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -33,46 +22,50 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        BCryptPasswordEncoder e = new BCryptPasswordEncoder();
-        System.out.println(e.encode("password"));
+//        BCryptPasswordEncoder e = new BCryptPasswordEncoder();
+//        System.out.println(e.encode("password"));
         http.authorizeRequests()
-                .antMatchers("/css/**", "/index").permitAll()
+                .antMatchers("/css/**", "/login").permitAll()
                 .antMatchers("/orders/**").hasRole("管理员")    //用户权限
-                .antMatchers("/main").hasRole("管理员")    //用户权限
                 .antMatchers("/users/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")    //跳转登录页面的控制器，该地址要保证和表单提交的地址一致！
-                .failureUrl("/error")
-                .failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-                        System.out.println(exception);
-                        response.sendRedirect("/login?error");
-                    }
-                })
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication arg2)
-                            throws IOException, ServletException {
-                        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                        if (principal != null && principal instanceof UserDetails) {
-                            UserDetails user = (UserDetails) principal;
-                            System.out.println("loginUser:" + user.getUsername());
-                            //维护在session中
-                            arg0.getSession().setAttribute("userDetail", user);
-                            arg1.sendRedirect("/main");
-                        }
-                    }
-                })
-                .permitAll()
-                .and()
-                .logout()
+                .defaultSuccessUrl("/main")
+                .failureUrl("/login?error")
+//                .failureHandler(new AuthenticationFailureHandler() {
+//                    @Override
+//                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+//                        System.out.println(exception);
+//                        response.sendRedirect("/login?error");
+//                    }
+//                })
+//                .successHandler(new AuthenticationSuccessHandler() {
+//                    @Override
+//                    public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication arg2)
+//                            throws IOException, ServletException {
+//                        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//                        if (principal != null && principal instanceof UserDetails) {
+//                            UserDetails user = (UserDetails) principal;
+//                            System.out.println("loginUser:" + user.getUsername());
+//                            //维护在session中
+//                            arg0.getSession().setAttribute("userDetail", user);
+//                            arg1.sendRedirect("/main");
+//                        }
+//                    }
+//                })
                 .permitAll()
                 .and()
                 .rememberMe()
+                .tokenValiditySeconds(12009600)
+                .key("luckbird")
                 .and()
-                .csrf().disable();        //暂时禁用CSRF，否则无法提交表单
+                .logout()
+                .logoutSuccessUrl("/login")
+                .permitAll()
+                .and()
+                .csrf()
+                .disable();        //暂时禁用CSRF，否则无法提交表单
 
         //super.configure(http);
     }
