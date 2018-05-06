@@ -57,15 +57,16 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .rememberMe()
-                .tokenValiditySeconds(12009600)
+                .tokenValiditySeconds(60)
                 .key("luckbird")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
-                .permitAll()
-                .and()
-                .csrf()
-                .disable();        //暂时禁用CSRF，否则无法提交表单
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll();
+//                .and()
+//                .csrf()
+//                .disable();        //暂时禁用CSRF，否则无法提交表单
 
         //super.configure(http);
     }

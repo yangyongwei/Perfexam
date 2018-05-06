@@ -19,7 +19,6 @@ package cn.piesat.exam.web;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -33,34 +32,42 @@ public class MainController {
         return "redirect:/login";
     }
 
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
-    }
-
-//    @RequestMapping("/user/index")
-//    public String userIndex() {
-//        return "user/index";
-//    }
-
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
 
+//    @RequestMapping("/index")
+//    public String index() {
+//        return "index";
+//    }
+
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+
     @RequestMapping("/main")
     public String mainPage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth.getAuthorities().toString().equals("[ROLE_组长]"))
-            return "index";//如果是客户登录
-        else
-            return "main";//如果是后台管理人员登录
+        if (auth.getAuthorities().toString().equals("[ROLE_管理员]")) {
+            return "index";
+        } else if (auth.getAuthorities().toString().equals("[ROLE_总监]")) {
+            return "home";
+        } else if (auth.getAuthorities().toString().equals("[ROLE_组长]")) {
+            return "main";
+        } else if (auth.getAuthorities().toString().equals("[ROLE_员工]")) {
+            return "main";
+        } else {
+            return "error";
+        }
     }
 
-    @RequestMapping("/login?error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
-    }
-
+//    @RequestMapping("/login?error")
+//    public String loginError(Model model) {
+//        model.addAttribute("loginError", true);
+//        System.out.println("用户名或密码！！");
+//        return "login";
+//    }
 }
