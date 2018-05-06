@@ -44,7 +44,6 @@ public class MyUserDetailsService implements UserDetailsService {
         Role role = roleService.findById(userRole.getRoleId());
         authorities.add(new SimpleGrantedAuthority(role.getName()));
         user.setAuthorities(authorities);
-        System.out.println("OOO" + user.toString());
         return user;
     }
 }
