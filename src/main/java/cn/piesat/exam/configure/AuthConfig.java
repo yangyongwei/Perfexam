@@ -72,7 +72,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-
 //        内存用户
 //        auth.
 //                passwordEncoder(new BCryptPasswordEncoder());
