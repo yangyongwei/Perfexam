@@ -33,8 +33,7 @@
                         <!--<div class="input-group-text font-weight-bold">用户名：</div>-->
                     </div>
                     <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"
-                           autofocus data-container="body" data-toggle="popover" data-trigger="manual" data-placement="right"
-                           data-html="true" data-content="<span style='color:red'>用户名已存在，请重新输入！</span>">
+                           autofocus>
                 </div>
             </div>
             <div class="form-group">
@@ -53,36 +52,14 @@
             <div class="row justify-content-around">
                 <a th:href="@{/register}" class="btn btn-primary col-md-2 m-1">注册</a>
                 <button type="submit" class="btn btn-success col-md-8 m-1">登录</button>
-                <button type="button" class="btn btn-warning" id="abc" >
-                    右侧的 Popover
-                </button>
             </div>
         </form>
     </div>
 </div>
-<input type="text" class="form-control" id="tableName" placeholder="请输入表格名称" data-toggle="tooltip" data-placement="top">
-
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/script.js}" charset="utf-8"></script>
-<script>
-    function showPopover(target, msg) {
-        target.attr("data-original-title", msg);
-        $('[data-toggle="tooltip"]').tooltip();
-        target.tooltip('show');
-        target.focus();
-
-        //2秒后消失提示框
-        var id = setTimeout(
-            function () {
-                target.attr("data-original-title", "");
-                target.tooltip('hide');
-            }, 2000
-        );
-    }
-    showPopover($("#tableName"),"表名已存在");
-</script>
 </body>
 </html>
