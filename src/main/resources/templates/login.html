@@ -15,8 +15,15 @@
 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 <div class="row justify-content-center position-absolute w-100">
     <div>
-        <p th:if="${param.logout}" class="alert alert-warning">你已经退出系统！</p>
-        <p th:if="${param.error}" class="alert alert-warning">用户名或密码错误，请重试！</p>
+        <p th:if="${param.logout}" class="alert alert-warning alert-dismissible fade show">你已经退出系统！
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        </p>
+        <p th:if="${param.error}" class="alert alert-warning alert-dismissible fade show">用户名或密码错误，请重试！
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button></p>
     </div>
 </div>
 <div class="container">
@@ -33,16 +40,15 @@
                         <!--<div class="input-group-text font-weight-bold">用户名：</div>-->
                     </div>
                     <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"
-                           autofocus>
+                           autofocus required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><span class="fa fa-lock"></span></span>
-                        <!--<div class="input-group-text font-weight-bold">密　码：</div>-->
                     </div>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" required>
                 </div>
             </div>
             <div class="form-group form-check align-items-center">
@@ -50,8 +56,8 @@
                 <label class="form-check-label" for="remember-me">记住我</label>
             </div>
             <div class="row justify-content-around">
-                <a th:href="@{/register}" class="btn btn-primary col-md-2 m-1">注册</a>
-                <button type="submit" class="btn btn-success col-md-8 m-1">登录</button>
+                <a th:href="@{/register}" class="btn btn-success col-md-3 m-1">注册</a>
+                <button type="submit" class="btn btn-primary col-md-8 m-1">登录</button>
             </div>
         </form>
     </div>

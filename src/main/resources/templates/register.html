@@ -27,7 +27,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa fa-user"></span></span>
+                        <span class="input-group-text"><span class="fa fa-user fa-fw"></span></span>
                         <!--<div class="input-group-text font-weight-bold">用户名：</div>-->
                     </div>
                     <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" autofocus
@@ -39,23 +39,23 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa fa-unlock"></span></span>
+                        <span class="input-group-text"><span class="fa fa-unlock fa-fw"></span></span>
                     </div>
-                    <input type="password" class="form-control" id="pwd0" name="pwd0" placeholder="请输入密码">
+                    <input type="password" class="form-control" id="pwd0" name="pwd0" placeholder="请输入密码" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa fa-unlock"></span></span>
+                        <span class="input-group-text"><span class="fa fa-unlock fa-fw"></span></span>
                     </div>
-                    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="请再次输入密码">
+                    <input type="password" class="form-control" id="pwd1" name="pwd1" placeholder="请再次输入密码" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa fa-user"></span></span>
+                        <span class="input-group-text"><span class="fa fa-user-cog fa-fw"></span></span>
                     </div>
                     <input type="text" class="form-control" id="realname" name="username" placeholder="请输入真实姓名"
                            required>
@@ -64,9 +64,9 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa fa-user-secret"></span></span>
+                        <span class="input-group-text"><span class="fa fa-shield-alt fa-fw"></span></span>
                     </div>
-                    <select class="form-control rounded-right" id="deptlist">
+                    <select class="form-control rounded-right" id="deptlist" required>
                         <option value="1" selected>请选择或输入部门</option>
                     </select>
                 </div>
@@ -74,9 +74,9 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa"></span></span>
+                        <span class="input-group-text"><span class="fa fa-users fa-fw"></span></span>
                     </div>
-                    <select class="form-control rounded-right" id="grouplist">
+                    <select class="form-control rounded-right" id="grouplist" required>
                         <option value="1" selected>请选择或输入分组</option>
                     </select>
                 </div>
@@ -84,7 +84,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><span class="fa fa-user-secret"></span></span>
+                        <span class="input-group-text"><span class="fa fa-flag fa-fw"></span></span>
                     </div>
                     <div class="form-control">
                         <div class="form-check form-check-inline">
@@ -103,8 +103,8 @@
                 </div>
             </div>
             <div class="form-row justify-content-between">
-                <a th:href="@{/login}" class="btn btn-primary col-md-3 m-1">登录</a>
-                <button type="submit" class="btn btn-success col-md-8 m-1">注册</button>
+                <a th:href="@{/login}" class="btn btn-success col-md-3 m-1">登录</a>
+                <button type="submit" class="btn btn-primary col-md-8 m-1">注册</button>
             </div>
         </form>
     </div>
