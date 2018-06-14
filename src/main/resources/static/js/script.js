@@ -8,6 +8,19 @@ $(function () {
         $("#username").popover(a);
         isShow = !isShow;
     });
+
+    $('#deptlist').editableSelect({
+        case_sensitive: false,
+        // items_then_scroll: 10 ,
+        filter:false
+    });
+
+    $('#grouplist').editableSelect({
+        case_sensitive: false,
+        // items_then_scroll: 10 ,
+        filter:false
+    });
+
 });
 // <script>
 // function showPopover(target, msg) {
