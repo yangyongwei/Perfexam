@@ -19,6 +19,7 @@ package cn.piesat.exam.web;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -43,7 +44,8 @@ public class MainController {
 //    }
 
     @RequestMapping("/register")
-    public String register() {
+    public String register(Model model) {
+
         return "register";
     }
 

@@ -4,3 +4,6 @@ body{
 .container{
     height: 100vh;
 }
+.form-control:focus {
+    box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+}

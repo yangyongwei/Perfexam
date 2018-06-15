@@ -1,27 +1,21 @@
-var isShow = true;
-var a;
+// var isShow = true;
+// var a;
+
 $(function () {
     // $("[data-toggle='popover']").popover();
 
     $("#abc").click(function () {
-        a = isShow?"show":"hide";
+        a = isShow ? "show" : "hide";
         $("#username").popover(a);
         isShow = !isShow;
     });
 
-    $('#deptlist').editableSelect({
-        case_sensitive: false,
-        // items_then_scroll: 10 ,
-        filter:false
-    });
-
-    $('#grouplist').editableSelect({
-        case_sensitive: false,
-        // items_then_scroll: 10 ,
-        filter:false
+    $("#pwd0").blur(function () {
+        $("#username").popover("show");
     });
 
 });
+
 // <script>
 // function showPopover(target, msg) {
 //     target.attr("data-original-title", msg);
