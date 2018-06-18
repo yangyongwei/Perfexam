@@ -28,9 +28,9 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 //        BCryptPasswordEncoder e = new BCryptPasswordEncoder();
 //        System.out.println(e.encode("password"));
         http.authorizeRequests()
-                .antMatchers("/css/**", "/js/**","/bootstrap/**","/login").permitAll()
+                .antMatchers("/css/**", "/js/**","/bootstrap/**","/login","/register").permitAll()
                 .antMatchers("/orders/**").hasRole("管理员")    //用户权限
-                .antMatchers("/users/**").hasRole("ADMIN")
+                .antMatchers("/users/**").hasRole("管理员")
                 .and()
                 .formLogin()
                 .loginPage("/login")    //跳转登录页面的控制器，该地址要保证和表单提交的地址一致！

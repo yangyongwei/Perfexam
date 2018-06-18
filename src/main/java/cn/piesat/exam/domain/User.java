@@ -16,8 +16,8 @@ public class User implements UserDetails {
     private String password;
     private String name;
     private String gender;
-    private Timestamp create_time;
-    private Timestamp last_login_time;
+    private Timestamp createTime;
+    private Timestamp lastLoginTime;
     private String status;
 
     // 用户角色

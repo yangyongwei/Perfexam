@@ -68,11 +68,9 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><span class="fa fa-shield-alt fa-fw"></span></span>
                     </div>
-                    <select class="form-control rounded-right" id="deptlist" placeholder="请选择或输入部门" required>
-                        <option value="1">A</option>
-                        <option value="2">A</option>
-                        <option value="3">A</option>
-                        <option value="4">A</option>
+                    <select class="form-control rounded-right" id="deptlist" placeholder="请选择或输入部门"
+                            onchange="alert('OO')" required>
+                        <option th:each="dept:${deptlist}" th:value="${dept.id}" th:text="${dept.deptName}"></option>
                     </select>
                 </div>
             </div>
@@ -82,10 +80,7 @@
                         <span class="input-group-text"><span class="fa fa-users fa-fw"></span></span>
                     </div>
                     <select class="form-control rounded-right" id="grouplist" placeholder="请选择或输入分组">
-                        <option value="1">A</option>
-                        <option value="2">A</option>
-                        <option value="3">A</option>
-                        <option value="4">A</option>
+
                     </select>
                 </div>
             </div>
@@ -121,17 +116,49 @@
     </div>
 </div>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="../static/js/jquery-3.3.1.slim.min.js" th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script src="../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 <script src="../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script src="../static/jquery-editable-select/jquery-editable-select.min.js"
         th:src="@{/jquery-editable-select/jquery-editable-select.min.js}"></script>
 <script>
-    $('#deptlist').editableSelect({
-        filter: false
-    });
+    // $("#deptlist").change(function () {
+
+    // });
+
     $('#grouplist').editableSelect({
         filter: false
     });
+
+    $('#deptlist').editableSelect({
+        filter: false,
+    }).on('select.editable-select', function (e, li) {
+        var t = li.val();
+        if (t == '') {
+            return;
+        }
+        $.ajax({
+            url: '/group/deptby',
+            async: false,
+            type: 'get',
+            data: {id: t},
+            success: function (data) {
+                $('#grouplist').editableSelect('clear');
+                $('#grouplist').val("");
+
+                for (var i = 0; i < data.length; i++) {
+                    $('#grouplist').editableSelect('add', data[i], data[i]);
+                }
+                $('#grouplist').val(data[0]);
+                // $('#grouplist').editableSelect('select', $(".es-list:eq(1) > li:first"));
+                // $('#grouplist').editableSelect('show');
+            }
+        });
+    });
+    // $('#deptlist').on('shown.editable-select', function (e) {
+    //     console.log("下拉框选项被选中")
+    // });
+
+
 </script>
 <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
 </body>

@@ -2,13 +2,17 @@ server:
   port: 8080
   servlet:
     session:
-      timeout: 3600
+      timeout: 3600s
 
 logging:
   level:
     root: INFO
     org.springframework.web: INFO
+    cn.piesat.exam.mapper: DEBUG
 
 spring:
   thymeleaf:
     cache: false
+  devtools:
+    restart:
+      enabled: false

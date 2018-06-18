@@ -14,6 +14,19 @@ $(function () {
         $("#username").popover("show");
     });
 
+    // $.ajax({
+    //     url: '/group/deptby',
+    //     async: false,
+    //     type: 'get',
+    //     data: {id: 1},
+    //     success: function (data) {
+    //         // var t2 = $("#grouplist").empty();
+    //         // for (var i = 0; i < data.length; i++) {
+    //         //     t2.append("<option value='" + data[i].key + "'>" + data[i].value + "</option>");
+    //         alert(data);
+    //         }
+    // });
+
 });
 
 // <script>
@@ -33,3 +46,4 @@ $(function () {
 // }
 // showPopover($("#tableName"),"表名已存在");
 // </script>
+

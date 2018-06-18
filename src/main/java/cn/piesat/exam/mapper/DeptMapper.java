@@ -9,9 +9,10 @@ import java.util.List;
 
 @Mapper
 public interface DeptMapper {
+
     @Select("select * from dept where id=#{id}")
     Dept findDeptById(@Param("id") Integer id);
 
-    @Select("select dept_name from dept")
+    @Select("select * from dept order by dept_name")
     List<Dept> findAllDept();
 }

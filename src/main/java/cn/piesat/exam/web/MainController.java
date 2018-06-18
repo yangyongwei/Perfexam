@@ -16,17 +16,25 @@ package cn.piesat.exam.web;
  * limitations under the License.
  */
 
+import cn.piesat.exam.domain.Dept;
+import cn.piesat.exam.service.DeptService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 /**
  * @author Joe Grandja
  */
 @Controller
 public class MainController {
+
+    @Autowired
+    private DeptService deptService;
 
     @RequestMapping("/")
     public String root() {
@@ -46,6 +54,8 @@ public class MainController {
     @RequestMapping("/register")
     public String register(Model model) {
 
+        List<Dept>  deptList = deptService.findAllDept();
+        model.addAttribute("deptlist",deptList);
         return "register";
     }
 

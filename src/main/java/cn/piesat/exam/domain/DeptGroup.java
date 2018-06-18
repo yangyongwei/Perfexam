@@ -5,7 +5,8 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class Dept {
+public class DeptGroup {
     private Integer id;
-    private String deptName;
+    private Integer deptId;
+    private Integer groupId;
 }
