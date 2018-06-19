@@ -17,6 +17,10 @@ public class DeptService {
         return deptMapper.findAllDept();
     }
 
+    public Integer findDeptIdByName(String dept_Name){
+        return deptMapper.findDeptIdByName(dept_Name);
+    }
+
     public Dept findDeptById(int id){
         return deptMapper.findDeptById(id);
     }
