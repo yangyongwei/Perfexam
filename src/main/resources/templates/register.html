@@ -69,7 +69,7 @@
                         <span class="input-group-text"><span class="fa fa-shield-alt fa-fw"></span></span>
                     </div>
                     <select class="form-control rounded-right" id="deptlist" placeholder="请选择或输入部门"
-                            onchange="clearGroupSelect()" required>
+                            onchange="updateGroup()" required>
                         <option th:each="dept:${deptlist}" th:value="${dept.id}" th:text="${dept.deptName}"></option>
                     </select>
                 </div>
@@ -121,7 +121,7 @@
 <script src="../static/jquery-editable-select/jquery-editable-select.min.js"
         th:src="@{/jquery-editable-select/jquery-editable-select.min.js}"></script>
 <script>
-    function clearGroupSelect(){
+    function updateGroup(){
         var deptname = $('#deptlist').val();
         if (deptname == '') {
             return;
@@ -152,27 +152,8 @@
     $('#deptlist').editableSelect({
         filter: false,
     }).on('select.editable-select', function (e, li) {
-        var deptname = li.text();
-        if (deptname == '') {
-            return;
-        }
-        $.ajax({
-            url: '/group/deptby',
-            async: false,
-            type: 'get',
-            data: {deptname: deptname},
-            success: function (data) {
-                $('#grouplist').editableSelect('clear');
-                $('#grouplist').val("");
-
-                for (var i = 0; i < data.length; i++) {
-                    $('#grouplist').editableSelect('add', data[i], data[i]);
-                }
-                $('#grouplist').val(data[0]);
-                // $('#grouplist').editableSelect('select', $(".es-list:eq(1) > li:first"));
-                // $('#grouplist').editableSelect('show');
-            }
-        });
+        // var deptname = li.text();
+        updateGroup();
     });
 </script>
 <script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
