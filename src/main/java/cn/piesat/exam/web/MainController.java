@@ -102,11 +102,5 @@ public class MainController {
             return "error";
         }
     }
-
-//    @RequestMapping("/login?error")
-//    public String loginError(Model model) {
-//        model.addAttribute("loginError", true);
-//        System.out.println("用户名或密码！！");
-//        return "login";
-//    }
+    
 }
