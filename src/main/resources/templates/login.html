@@ -39,7 +39,7 @@
                         <span class="input-group-text"><span class="fa fa-user"></span></span>
                         <!--<div class="input-group-text font-weight-bold">用户名：</div>-->
                     </div>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"
+                    <input type="text" th:attr="value=${userName}" class="form-control" id="username" name="username" placeholder="请输入用户名"
                            autofocus required>
                 </div>
             </div>
@@ -66,6 +66,6 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script th:src="@{/js/jquery-3.3.1.min.js}" src="../static/js/jquery-3.3.1.min.js"></script>
 <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}" src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/js/script.js}" src="../static/js/script.js" charset="utf-8"></script>
+<script th:src="@{/js/script.js}" src="../static/js/script.js"></script>
 </body>
 </html>

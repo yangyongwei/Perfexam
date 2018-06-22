@@ -53,7 +53,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                 .tokenValiditySeconds(60)
-                .key("luckbird")
+                .key("luckbird#1")
                 .and()
                 .logout()
                 .logoutUrl("/logout")

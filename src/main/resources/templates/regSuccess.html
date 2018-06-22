@@ -21,11 +21,13 @@
                 <h5 class="modal-title" id="exampleModalCenterTitle">提示：</h5>
             </div>
             <div class="modal-body">
-                <img th:src="@{/images/regOk.png}" src="../static/images/regOk.png" class="okimg" alt=""><span class="ml-4">恭喜你，注册成功！</span>
+                <img th:src="@{/images/regOk.png}" src="../static/images/regOk.png" class="okimg" alt=""><span
+                    class="ml-4">恭喜你，注册成功！</span>
             </div>
             <div class="modal-footer">
                 <!--<button class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                <a class="btn btn-success" th:href="@{/login}">立即登录</a>
+                <a class="btn btn-success" th:href="@{/loginWith(userName=${userName})}">立即登录</a>
+                <!--<a class="btn btn-success" th:href="@{'/login/'+ ${regUserName}}">立即登录</a>-->
             </div>
         </div>
     </div>
@@ -39,12 +41,13 @@
         backdrop: "static",
         keyboard: false
     });
-    // var loginSuccess = [[${loginSuccess}]];
-    // console.log(loginSuccess);
-    // if(loginSuccess){
-    //     $('#loginOKModal').modal('show');
-    // }
-    $('#loginOKModal').modal('show');
+    var regSuccess = [[${regSuccess}]];
+    console.log(regSuccess);
+    console.log([[${userName}]]);
+    if (regSuccess) {
+        $('#loginOKModal').modal('show');
+    }
+
     /*]]>*/
 </script>
 </body>

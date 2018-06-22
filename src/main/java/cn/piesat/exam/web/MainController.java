@@ -16,15 +16,16 @@ package cn.piesat.exam.web;
  * limitations under the License.
  */
 
+import cn.piesat.exam.common.RegUserInfo;
 import cn.piesat.exam.domain.Dept;
 import cn.piesat.exam.service.DeptService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ import java.util.List;
  * @author Joe Grandja
  */
 @Controller
+@Log4j2
 public class MainController {
 
     @Autowired
@@ -47,16 +49,34 @@ public class MainController {
         return "login";
     }
 
-    @PostMapping("/reguser")
-    public String test1(Model model) {
-        model.addAttribute("loginSuccess", true);
-        return "regSuccess";
+    @RequestMapping("/loginWith")
+    public String loginWithUserName(@RequestParam(name = "userName") String userName, Model model) {
+        model.addAttribute("userName", userName);
+        return "login";
     }
 
-//    @RequestMapping("/index")
-//    public String index() {
-//        return "index";
+//    @PostMapping("/regUser")
+//    public String reguser(HttpServletRequest request, Model model) {
+//        String regUserName = request.getParameter("regUserName");
+//        String role = request.getParameter("roleOptions");
+//
+//        log.warn("注册的用户名是：" + regUserName);
+//        log.warn("用户角色是：" + role);
+//        model.addAttribute("regSuccess", true);
+//        return "regSuccess";
 //    }
+
+    @PostMapping("/regUser")
+    public String reguser(@ModelAttribute RegUserInfo r, Model model) {
+        String userName = r.getRegUserName();
+        String role = r.getRoleOptions();
+
+        log.warn("注册的用户名是：" + userName);
+        log.warn("用户角色是：" + role);
+        model.addAttribute("regSuccess", true);
+        model.addAttribute("userName", userName);
+        return "regSuccess";
+    }
 
     @RequestMapping("/register")
     public String register(Model model) {
