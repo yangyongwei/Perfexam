@@ -2,31 +2,27 @@
 // var a;
 
 $(function () {
-    // $("[data-toggle='popover']").popover();
-
-    $("#abc").click(function () {
-        a = isShow ? "show" : "hide";
-        $("#username").popover(a);
-        isShow = !isShow;
-    });
 
     $("#pwd0").blur(function () {
-        $("#username").popover("show");
+
     });
 
-    // $.ajax({
-    //     url: '/group/deptby',
-    //     async: false,
-    //     type: 'get',
-    //     data: {id: 1},
-    //     success: function (data) {
-    //         // var t2 = $("#grouplist").empty();
-    //         // for (var i = 0; i < data.length; i++) {
-    //         //     t2.append("<option value='" + data[i].key + "'>" + data[i].value + "</option>");
-    //         alert(data);
-    //         }
-    // });
-
+    $("#regUserName").blur(function () {
+        var userName = $("#regUserName").val().trim();
+        $.ajax({
+            url: '/user/findBy',
+            async: false,
+            type: 'get',
+            data: {userName: userName},
+            success: function (data) {
+                if (data) {
+                    $("#regUserName").popover("show");
+                } else {
+                    $("#regUserName").popover("hide");
+                }
+            }
+        });
+    });
 });
 
 // <script>

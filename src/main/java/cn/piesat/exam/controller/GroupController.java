@@ -39,11 +39,11 @@ public class GroupController {
 //        return groupNames;
 //    }
 
-    @GetMapping("/deptby")
-    public List<String> GroupListByDeptName(@RequestParam(value="deptname") String deptname)
+    @GetMapping("/findGroupBy")
+    public List<String> GroupListByDeptName(@RequestParam(value="deptName") String deptName)
     {
         List<String> groupNames = new ArrayList();
-        Integer id = deptService.findDeptIdByName(deptname);
+        Integer id = deptService.findDeptIdByName(deptName);
         List<Integer>  groupIds = deptGroupService.findGroupIdsByDeptId(id);
         if(groupIds.isEmpty()){
             return groupNames;

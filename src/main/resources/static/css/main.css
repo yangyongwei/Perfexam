@@ -1,9 +1,17 @@
-body{
+body {
     background-color: #f1f1f1;
 }
-.container{
+
+.container {
     height: 100vh;
 }
+
 .form-control:focus {
     box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+}
+
+.okimg {
+    width: 40px;
+    height: 40px;
+    margin-left: 30px;
 }

@@ -23,6 +23,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -46,6 +47,12 @@ public class MainController {
         return "login";
     }
 
+    @PostMapping("/reguser")
+    public String test1(Model model) {
+        model.addAttribute("loginSuccess", true);
+        return "regSuccess";
+    }
+
 //    @RequestMapping("/index")
 //    public String index() {
 //        return "index";
@@ -54,8 +61,8 @@ public class MainController {
     @RequestMapping("/register")
     public String register(Model model) {
 
-        List<Dept>  deptList = deptService.findAllDept();
-        model.addAttribute("deptlist",deptList);
+        List<Dept> deptList = deptService.findAllDept();
+        model.addAttribute("deptList", deptList);
         return "register";
     }
 
