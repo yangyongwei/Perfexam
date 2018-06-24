@@ -42,7 +42,7 @@ public class MyUserDetailsService implements UserDetailsService {
         // 添加权限
         UserRole userRole = userRoleService.findByUserId(user.getId());
         Role role = roleService.findById(userRole.getRoleId());
-        authorities.add(new SimpleGrantedAuthority(role.getName()));
+        authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         user.setAuthorities(authorities);
         return user;
     }

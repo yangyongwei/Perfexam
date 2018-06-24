@@ -11,6 +11,6 @@ public class RegUserInfo {
     private String realName;
     private String deptList;
     private String groupList;
-    private String roleOptions;
+    private int roleOptions;
 
 }

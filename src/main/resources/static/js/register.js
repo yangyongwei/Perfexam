@@ -1,5 +1,6 @@
 function updateGroup() {
     var deptName = $('#deptList').val().trim();
+    // $('#dept').val(deptName);
     if (deptName == '') {
         return;
     }
@@ -16,6 +17,7 @@ function updateGroup() {
                 $('#groupList').editableSelect('add', data[i], data[i]);
             }
             $('#groupList').val(data[0]);
+            $('#group').val(data[0]);
             // $('#grouplist').editableSelect('select', $(".es-list:eq(1) > li:first"));
             // $('#grouplist').editableSelect('show');
         }

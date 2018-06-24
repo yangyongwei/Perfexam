@@ -5,8 +5,9 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class UserRole {
+public class UserDeptGroup {
     private Integer id;
     private Integer userId;
-    private Integer roleId;
+    private Integer deptId;
+    private Integer groupId;
 }

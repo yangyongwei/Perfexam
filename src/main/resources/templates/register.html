@@ -17,10 +17,10 @@
 
 <body>
 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center align-items-center">
         <form th:action="@{/regUser}" method="post"
-              class="form-control shadow-lg p-5 mt-4 bg-white rounded col-md-5">
+              class="form-control shadow-lg p-5 mt-4 bg-white rounded col-lg-5 col-md-8 col-sm-10">
             <div>
                 <h4 class="text-center mb-4">用户注册</h4>
             </div>
@@ -72,10 +72,11 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><span class="fa fa-shield-alt fa-fw"></span></span>
                     </div>
-                    <select class="form-control rounded-right" id="deptList" placeholder="请选择或输入部门"
+                    <select class="form-control rounded-right" id="deptList" name="deptList" placeholder="请选择或输入部门"
                             onchange="updateGroup()" required>
                         <option th:each="dept:${deptList}" th:value="${dept.id}" th:text="${dept.deptName}"></option>
                     </select>
+                    <input id="dept" name="dept" type="hidden">
                 </div>
             </div>
             <div class="form-group">
@@ -83,8 +84,9 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><span class="fa fa-users fa-fw"></span></span>
                     </div>
-                    <select class="form-control rounded-right" id="groupList" placeholder="请选择或输入分组">
+                    <select class="form-control rounded-right" id="groupList" name="groupList" placeholder="请选择或输入分组">
                     </select>
+                    <input id="group" name="group" type="hidden">
                 </div>
             </div>
             <div class="form-group">
@@ -93,20 +95,11 @@
                         <span class="input-group-text"><span class="fa fa-flag fa-fw"></span></span>
                     </div>
                     <div class="form-control">
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline" th:each="role,roleStat:${roleList}">
                             <input class="form-check-input ml-3" type="radio" name="roleOptions"
-                                   id="inlineRadio1" value="ROLE_员工" checked>
-                            <label class="form-check-label" for="inlineRadio1">员工</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input ml-3" type="radio" name="roleOptions"
-                                   id="inlineRadio2" value="ROLE_组长">
-                            <label class="form-check-label" for="inlineRadio2">组长</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input ml-3" type="radio" name="roleOptions"
-                                   id="inlineRadio3" value="ROLE_总监">
-                            <label class="form-check-label" for="inlineRadio3">总监</label>
+                                   th:id="'role' + ${role.id}" th:value="${role.id}" th:checked="${roleStat.index} == 0">
+                            <label class="form-check-label" th:for="'role'+${role.id}"
+                                   th:text="${#strings.substring(role.roleName,5)}"></label>
                         </div>
                     </div>
                 </div>

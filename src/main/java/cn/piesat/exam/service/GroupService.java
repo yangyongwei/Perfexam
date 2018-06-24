@@ -17,7 +17,15 @@ public class GroupService {
         return groupMapper.findGroupById(id);
     }
 
+    public Group findGroupByName(String groupName){
+        return groupMapper.findGroupByName(groupName);
+    }
+
     public List<Group> findGroupByIds(List<Integer> ids){
         return groupMapper.findGroupByIds(ids);
+    }
+
+    public void add(Group group){
+        groupMapper.add(group);
     }
 }

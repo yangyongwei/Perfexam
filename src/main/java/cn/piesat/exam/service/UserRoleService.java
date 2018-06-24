@@ -11,7 +11,11 @@ public class UserRoleService {
     @Autowired
     UserRoleMapper userRoleMapper;
 
-    public UserRole findByUserId(Integer userId){
+    public UserRole findByUserId(Integer userId) {
         return userRoleMapper.findRoleByUserId(userId);
+    }
+
+    public void add(UserRole userRole){
+        userRoleMapper.add(userRole);
     }
 }

@@ -15,4 +15,4 @@ spring:
     cache: false
   devtools:
     restart:
-      enabled: false
+      enabled: true
