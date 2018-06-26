@@ -105,6 +105,7 @@ public class MainController {
         Integer deptId = null;
         Integer groupId = null;
         Integer userId = null;
+        Boolean regStatus = true;
 
         // 保存部门
         Dept dept = deptService.findDeptByName(deptName);
@@ -135,46 +136,56 @@ public class MainController {
         }
 
         // 保存部门和组
+
+
         if (groupId != null) {
-            DeptGroup deptGroup = new DeptGroup();
-            deptGroup.setDeptId(deptId);
-            deptGroup.setGroupId(groupId);
-            deptGroupService.add(deptGroup);
-            log.info("部门：'" + deptName + "' 分组:'" + groupName + "' 保存成功！");
+            DeptGroup dg = deptGroupService.findDeptGroupByDeptIdGroupId(deptId,groupId);
+            if (dg == null){
+                DeptGroup deptGroup = new DeptGroup();
+                deptGroup.setDeptId(deptId);
+                deptGroup.setGroupId(groupId);
+                deptGroupService.add(deptGroup);
+                log.info("部门：'" + deptName + "' 分组:'" + groupName + "' 保存成功！");
+            }
         }
 
-
         // 保存用户
-        User u = new User();
-        u.setUsername(userName);
-        BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
-        u.setPassword(pe.encode(pwd));
-        u.setName(realName);
-        Timestamp ts = new Timestamp(new Date().getTime());
-        u.setCreateTime(ts);
-        userService.add(u);
-        userId = u.getId();
+        User u = userService.findByUsername(userName);
+        if (u == null) {
+            u = new User();
+            u.setUsername(userName);
+            BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+            u.setPassword(pe.encode(pwd));
+            u.setName(realName);
+            Timestamp ts = new Timestamp(new Date().getTime());
+            u.setCreateTime(ts);
+            userService.add(u);
+            userId = u.getId();
 
-        // 保存用户、角色
-        roleName = roleService.findById(roleId).getRoleName();
-        UserRole userRole = new UserRole();
-        userRole.setUserId(userId);
-        userRole.setRoleId(roleId);
-        userRoleService.add(userRole);
-        log.info("用户：'" + userName + "' 角色:'" + roleName + "' 保存成功！");
+            // 保存用户、角色
+            roleName = roleService.findById(roleId).getRoleName();
+            UserRole userRole = new UserRole();
+            userRole.setUserId(userId);
+            userRole.setRoleId(roleId);
+            userRoleService.add(userRole);
+            log.info("用户：'" + userName + "' 角色:'" + roleName + "' 保存成功！");
 
-        // 保存用户、部门、分组
-        UserDeptGroup uDG = new UserDeptGroup();
-        uDG.setUserId(userId);
-        uDG.setDeptId(deptId);
-        uDG.setGroupId(groupId);
+            // 保存用户、部门、分组
+            UserDeptGroup uDG = new UserDeptGroup();
+            uDG.setUserId(userId);
+            uDG.setDeptId(deptId);
+            uDG.setGroupId(groupId);
 
-        userDeptGroupService.add(uDG);
-        log.info("用户：" + userName + "部门：'" + deptName + "' 分组:'" + groupName + "' 保存成功！");
+            userDeptGroupService.add(uDG);
+            log.info("用户：'" + userName + "' 部门：'" + deptName + "' 分组:'" + groupName + "' 保存成功！");
+            regStatus = true;
+        } else {
+            regStatus = false;
+        }
 
-        model.addAttribute("regSuccess", true);
+        model.addAttribute("regStatus", regStatus);
         model.addAttribute("userName", userName);
-        return "regSuccess";
+        return "regResult";
     }
 
     @RequestMapping("/register")

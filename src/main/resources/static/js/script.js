@@ -1,5 +1,7 @@
 $(function () {
-
+    if($("#username").val() != ""){
+        $("#password").focus();
+    }
     // 2秒后消失提示框
     setTimeout(
         function () {
@@ -7,4 +9,3 @@ $(function () {
         }, 2000
     );
 });
-

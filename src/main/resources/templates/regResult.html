@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>用户注册成功</title>
+    <title>用户注册</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
           th:href="@{/bootstrap/css/bootstrap.min.css}"/>
@@ -13,21 +13,38 @@
 
 <body>
 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-<!-- Modal -->
+<!-- OK Modal -->
 <div class="modal fade mb-5" id="loginOKModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">提示：</h5>
+                <h5 class="modal-title" id="oKModalCenterTitle">提示：</h5>
             </div>
             <div class="modal-body">
-                <img th:src="@{/images/regOk.png}" src="../static/images/regOk.png" class="okimg" alt=""><span
+                <img th:src="@{/images/regOk.png}" src="../static/images/regOk.png" class="regimg" alt=""><span
                     class="ml-4">恭喜你，注册成功！</span>
             </div>
             <div class="modal-footer">
                 <!--<button class="btn btn-secondary" data-dismiss="modal">Close</button>-->
                 <a class="btn btn-success" th:href="@{/loginWith(userName=${userName})}">立即登录</a>
-                <!--<a class="btn btn-success" th:href="@{'/login/'+ ${regUserName}}">立即登录</a>-->
+                <!--<a class="btn btn-success" th:href="@{'/login/'+ ${userName}}">立即登录</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fail Modal -->
+<div class="modal fade mb-5" id="loginFailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="failModalCenterTitle">提示：</h5>
+            </div>
+            <div class="modal-body">
+                <img th:src="@{/images/regFail.png}" src="../static/images/regFail.png" class="regimg" alt=""><span
+                    class="ml-4" th:text="'用户名：' + ${userName} + ' 刚刚被注册了，请重新注册！'"></span>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-success" href="javascript:history.go(-1);">重新注册</a>
             </div>
         </div>
     </div>
@@ -37,17 +54,24 @@
 <script src="../static/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    $('#loginOKModal').modal({
-        backdrop: "static",
-        keyboard: false
-    });
-    var regSuccess = [[${regSuccess}]];
-    console.log(regSuccess);
+    var regStatus = [[${regStatus}]];
+    console.log(regStatus);
     console.log([[${userName}]]);
-    if (regSuccess) {
+    if (regStatus == true) {
+        console.log("loginOKModal");
+        $('#loginOKModal').modal({
+            backdrop: "static",
+            keyboard: false
+        });
         $('#loginOKModal').modal('show');
+    } else {
+        console.log("loginFailModal");
+        $('#loginFailModal').modal({
+            backdrop: "static",
+            keyboard: false
+        });
+        $('#loginFailModal').modal('show');
     }
-
     /*]]>*/
 </script>
 </body>

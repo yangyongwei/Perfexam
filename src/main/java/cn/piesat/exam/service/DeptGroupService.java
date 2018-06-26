@@ -20,4 +20,8 @@ public class DeptGroupService {
     public void add(DeptGroup deptGroup){
         deptGroupMapper.add(deptGroup);
     }
+
+    public DeptGroup findDeptGroupByDeptIdGroupId(Integer dept_id,Integer group_id){
+        return deptGroupMapper.findDeptGroupByDeptIdGroupId(dept_id,group_id);
+    }
 }
