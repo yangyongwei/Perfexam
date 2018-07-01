@@ -22,4 +22,8 @@ public class UserService {
     public void add(User user){
         userMapper.add(user);
     }
+
+    public void updateLoginTime(User user){
+        userMapper.updateLoginTime(user);
+    }
 }

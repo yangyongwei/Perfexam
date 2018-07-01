@@ -204,6 +204,9 @@ public class MainController {
     public String mainPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User u = (User) auth.getPrincipal();
+        u.setLastLoginTime(new Timestamp(new Date().getTime()));
+//        更新用户登录时间
+        userService.updateLoginTime(u);
         Integer userId = u.getId();
         String userRealName = u.getName();
         String roleName = u.getAuthoritiesString();

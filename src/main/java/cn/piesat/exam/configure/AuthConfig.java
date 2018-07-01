@@ -28,7 +28,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/images/**","/css/**", "/js/**","/bootstrap/**","/jquery-editable-select/**","/login","/register","/regUser","/loginWith","/group/findGroupBy","/user/findBy").permitAll()
-//                .antMatchers("/main").authenticated()
                 .antMatchers("/orders/**").hasRole("管理员")    //用户权限
                 .antMatchers("/users/**").hasRole("管理员")
                 .anyRequest().authenticated()
