@@ -1,11 +1,13 @@
 package cn.piesat.exam.common;
 
+import cn.piesat.exam.domain.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
+
+//import org.springframework.security.core.userdetails.User;
 
 /**
  * 自定义用户身份信息

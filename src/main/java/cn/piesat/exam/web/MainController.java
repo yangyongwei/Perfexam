@@ -120,7 +120,7 @@ public class MainController {
         }
 
         // 保存组
-        if (groupName != "") {
+        if (!groupName.equals("")) {
             Group group = groupService.findGroupByName(groupName);
             if (group == null) {
                 Group g = new Group();
@@ -131,16 +131,12 @@ public class MainController {
             } else {
                 groupId = group.getId();
             }
-        } else {
-            groupId = null;
         }
 
         // 保存部门和组
-
-
         if (groupId != null) {
-            DeptGroup dg = deptGroupService.findDeptGroupByDeptIdGroupId(deptId,groupId);
-            if (dg == null){
+            DeptGroup dg = deptGroupService.findDeptGroupByDeptIdGroupId(deptId, groupId);
+            if (dg == null) {
                 DeptGroup deptGroup = new DeptGroup();
                 deptGroup.setDeptId(deptId);
                 deptGroup.setGroupId(groupId);
@@ -205,14 +201,39 @@ public class MainController {
 
 
     @RequestMapping("/main")
-    public String mainPage() {
+    public String mainPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth.getAuthorities().toString().equals("[ROLE_管理员]")) {
+        User u = (User) auth.getPrincipal();
+
+        Integer userId = u.getId();
+        String userRealName = u.getName();
+        String roleName = u.getAuthoritiesString();
+
+        UserDeptGroup udg = userDeptGroupService.findUserDeptGroupByUserId(userId);
+        String deptName = null;
+        String groupName = null;
+        if (udg != null) {
+            Integer deptId = udg.getDeptId();
+            Integer groupId = udg.getGroupId();
+            if (deptId != null) {
+                deptName = deptService.findDeptById(deptId).getDeptName();
+            }
+            if (groupId != null) {
+                groupName = groupService.findGroupById(groupId).getGroupName();
+            }
+        }
+
+        model.addAttribute("userRealName", userRealName);
+        model.addAttribute("roleName", roleName);
+        model.addAttribute("deptName", deptName);
+        model.addAttribute("groupName", groupName);
+
+        if (roleName.equals("管理员")) {
             return "main1";
         } else if (auth.getAuthorities().toString().equals("[ROLE_总监]")) {
             return "home";
         } else if (auth.getAuthorities().toString().equals("[ROLE_组长]")) {
-            return "main";
+            return "main1";
         } else if (auth.getAuthorities().toString().equals("[ROLE_员工]")) {
             return "main";
         } else {

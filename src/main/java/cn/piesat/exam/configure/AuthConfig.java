@@ -1,5 +1,6 @@
 package cn.piesat.exam.configure;
 
+import cn.piesat.exam.domain.User;
 import cn.piesat.exam.security.MyUserDetailsService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,6 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        BCryptPasswordEncoder e = new BCryptPasswordEncoder();
-//        System.out.println(e.encode("password"));
         http.authorizeRequests()
                 .antMatchers("/css/**", "/js/**","/bootstrap/**","/login","/register").permitAll()
                 .antMatchers("/orders/**").hasRole("管理员")    //用户权限
@@ -37,13 +36,13 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/main")
                 .failureUrl("/login?error")
                 .failureHandler((request, response, exception) -> {
-                    System.out.println(exception);
+                    log.error(exception);
                     response.sendRedirect("/login?error");
                 })
                 .successHandler((request, response, authentication) -> {
                     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                     if (principal != null && principal instanceof UserDetails) {
-                        UserDetails user = (UserDetails) principal;
+                        User user = (User) principal;
                         log.info("LoginUser:" + user.getUsername());
 //                            request.getSession().setAttribute("userDetail", user);
                             response.sendRedirect("/main");
@@ -52,7 +51,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .rememberMe()
-                .tokenValiditySeconds(60)
+                .tokenValiditySeconds(600)
                 .key("luckbird#1")
                 .and()
                 .logout()

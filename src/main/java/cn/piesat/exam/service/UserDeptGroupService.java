@@ -11,11 +11,11 @@ public class UserDeptGroupService {
     @Autowired
     UserDeptGroupMapper userDeptGroupMapper;
 
-    public UserDeptGroup findUserDeptGroupByUserId(Integer userId){
+    public UserDeptGroup findUserDeptGroupByUserId(Integer userId) {
         return userDeptGroupMapper.findUserDeptGroupByUserId(userId);
     }
 
-    public void add(UserDeptGroup userDeptGroup){
+    public void add(UserDeptGroup userDeptGroup) {
         userDeptGroupMapper.add(userDeptGroup);
     }
 

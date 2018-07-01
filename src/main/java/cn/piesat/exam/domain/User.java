@@ -4,9 +4,12 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.thymeleaf.util.StringUtils;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @ToString
@@ -41,5 +44,13 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getAuthoritiesString() {
+        List<String> authorities = new ArrayList<>();
+        for (GrantedAuthority ga : this.getAuthorities()) {
+            authorities.add(ga.getAuthority().substring(5));
+        }
+        return StringUtils.join(authorities, ",");
     }
 }

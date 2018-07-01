@@ -13,19 +13,19 @@ public class GroupService {
     @Autowired
     GroupMapper groupMapper;
 
-    public Group findGroupById(int id){
+    public Group findGroupById(int id) {
         return groupMapper.findGroupById(id);
     }
 
-    public Group findGroupByName(String groupName){
+    public Group findGroupByName(String groupName) {
         return groupMapper.findGroupByName(groupName);
     }
 
-    public List<Group> findGroupByIds(List<Integer> ids){
+    public List<Group> findGroupByIds(List<Integer> ids) {
         return groupMapper.findGroupByIds(ids);
     }
 
-    public void add(Group group){
+    public void add(Group group) {
         groupMapper.add(group);
     }
 }
