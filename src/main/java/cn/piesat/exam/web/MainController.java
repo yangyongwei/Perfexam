@@ -204,7 +204,6 @@ public class MainController {
     public String mainPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User u = (User) auth.getPrincipal();
-
         Integer userId = u.getId();
         String userRealName = u.getName();
         String roleName = u.getAuthoritiesString();

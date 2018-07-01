@@ -27,9 +27,11 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**", "/js/**","/bootstrap/**","/login","/register").permitAll()
+                .antMatchers("/images/**","/css/**", "/js/**","/bootstrap/**","/jquery-editable-select/**","/login","/register","/regUser","/loginWith","/group/findGroupBy","/user/findBy").permitAll()
+//                .antMatchers("/main").authenticated()
                 .antMatchers("/orders/**").hasRole("管理员")    //用户权限
                 .antMatchers("/users/**").hasRole("管理员")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")    //跳转登录页面的控制器，该地址要保证和表单提交的地址一致！
@@ -51,7 +53,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .rememberMe()
-                .tokenValiditySeconds(600)
+                .tokenValiditySeconds(10)
                 .key("luckbird#1")
                 .and()
                 .logout()

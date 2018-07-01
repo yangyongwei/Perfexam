@@ -13,7 +13,7 @@
 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-fixed-top">
     <span class="navbar-brand" href="#">
-        <span class="fa fa-home fa-fw"></span><span class="ml-1">绩效考核系统</span></span>
+        <span class="fa fa-home fa-fw"></span><span class="ml-2">绩效考核系统</span></span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,9 +27,9 @@
             <div class="navbar-nav" sec:authorize="isAuthenticated()">
                 <!--<span class="navbar-text" sec:authentication="name"></span>-->
                 <!--<span sec:authentication="principal.authorities"></span>-->
-                <span class="navbar-text" th:text="${deptName} "></span>
-                <span class="navbar-text" th:text="${groupName} "></span>
-                <span class="navbar-text" th:text="${roleName} "></span>
+                <span class="navbar-text mr-3" th:text="${deptName}"></span>
+                <span class="navbar-text mr-3" th:text="${groupName}"></span>
+                <span class="navbar-text mr-3" th:text="${roleName}"></span>
                 <!--span class="nav-item">
                     <a class="nav-link" th:href="@{/login?logout}">退出</a>
                 </span-->
@@ -42,10 +42,13 @@
                     <span th:text="${userRealName}"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">修改密码</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-pencil-alt fa-fw"></i>&nbsp;修改密码</a>
                     <!--<a class="dropdown-item" href="#">Another action</a>-->
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{/login?logout}">退出</a>
+                    <form name="logout" th:action="@{/logout}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    </form>
+                    <span class="dropdown-item" onclick="logout.submit()"><i class="fa fa-sign-out-alt fa-fw"></i>&nbsp;退出</span>
                 </div>
             </div>
         </div>
