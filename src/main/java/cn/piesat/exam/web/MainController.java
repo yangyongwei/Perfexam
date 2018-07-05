@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,24 +41,22 @@ import java.util.List;
 @Log4j2
 public class MainController {
 
+    public static final String ADMIN = "管理员";
+    public static final String MANAGER = "总监";
+    public static final String TEAMLEADER = "组长";
+    public static final String STAFF = "员工";
     @Autowired
     private DeptService deptService;
-
     @Autowired
     private GroupService groupService;
-
     @Autowired
     private DeptGroupService deptGroupService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private RoleService roleService;
-
     @Autowired
     private UserRoleService userRoleService;
-
     @Autowired
     private UserDeptGroupService userDeptGroupService;
 
@@ -79,34 +76,20 @@ public class MainController {
         return "login";
     }
 
-//    @PostMapping("/regUser")
-//    public String regUser(HttpServletRequest request, Model model) {
-//        String regUserName = request.getParameter("regUserName");
-//        String role = request.getParameter("roleOptions");
-//        String dept = request.getParameter("dept");
-//        log.warn("注册的部门是：" + dept);
-//
-//        log.warn("注册的用户名是：" + regUserName);
-//        log.warn("用户角色是：" + role);
-//        model.addAttribute("regSuccess", true);
-//        return "regSuccess";
-//    }
-
     @PostMapping("/regUser")
     public String regUser(@ModelAttribute RegUserInfo r, Model model) {
         // 取得前端传过来的数据
         String userName = r.getRegUserName().trim();
         String pwd = r.getPwd1();
         int roleId = r.getRoleOptions();
-        String roleName = null;
         String realName = r.getRealName().trim();
         String deptName = r.getDeptList().trim();
         String groupName = r.getGroupList().trim();
+        String roleName = null;
         Integer deptId = null;
         Integer groupId = null;
         Integer userId = null;
         Boolean regStatus = true;
-
         // 保存部门
         Dept dept = deptService.findDeptByName(deptName);
         if (dept == null) {
@@ -118,9 +101,8 @@ public class MainController {
         } else {
             deptId = dept.getId();
         }
-
         // 保存组
-        if (!groupName.equals("")) {
+        if (!"".equals(groupName)) {
             Group group = groupService.findGroupByName(groupName);
             if (group == null) {
                 Group g = new Group();
@@ -132,7 +114,6 @@ public class MainController {
                 groupId = group.getId();
             }
         }
-
         // 保存部门和组
         if (groupId != null) {
             DeptGroup dg = deptGroupService.findDeptGroupByDeptIdGroupId(deptId, groupId);
@@ -144,7 +125,6 @@ public class MainController {
                 log.info("部门：'" + deptName + "' 分组:'" + groupName + "' 保存成功！");
             }
         }
-
         // 保存用户
         User u = userService.findByUsername(userName);
         if (u == null) {
@@ -153,11 +133,9 @@ public class MainController {
             BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
             u.setPassword(pe.encode(pwd));
             u.setName(realName);
-            Timestamp ts = new Timestamp(new Date().getTime());
-            u.setCreateTime(ts);
+            u.setCreateTime(new Timestamp(System.currentTimeMillis()));
             userService.add(u);
             userId = u.getId();
-
             // 保存用户、角色
             roleName = roleService.findById(roleId).getRoleName();
             UserRole userRole = new UserRole();
@@ -165,20 +143,17 @@ public class MainController {
             userRole.setRoleId(roleId);
             userRoleService.add(userRole);
             log.info("用户：'" + userName + "' 角色:'" + roleName + "' 保存成功！");
-
             // 保存用户、部门、分组
             UserDeptGroup uDG = new UserDeptGroup();
             uDG.setUserId(userId);
             uDG.setDeptId(deptId);
             uDG.setGroupId(groupId);
-
             userDeptGroupService.add(uDG);
             log.info("用户：'" + userName + "' 部门：'" + deptName + "' 分组:'" + groupName + "' 保存成功！");
             regStatus = true;
         } else {
             regStatus = false;
         }
-
         model.addAttribute("regStatus", regStatus);
         model.addAttribute("userName", userName);
         return "regResult";
@@ -204,7 +179,7 @@ public class MainController {
     public String mainPage(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User u = (User) auth.getPrincipal();
-        u.setLastLoginTime(new Timestamp(new Date().getTime()));
+        u.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
 //        更新用户登录时间
         userService.updateLoginTime(u);
         Integer userId = u.getId();
@@ -230,13 +205,13 @@ public class MainController {
         model.addAttribute("deptName", deptName);
         model.addAttribute("groupName", groupName);
 
-        if (roleName.equals("管理员")) {
+        if (ADMIN.equals(roleName)) {
             return "main1";
-        } else if (auth.getAuthorities().toString().equals("[ROLE_总监]")) {
+        } else if (MANAGER.equals(roleName)) {
             return "home";
-        } else if (auth.getAuthorities().toString().equals("[ROLE_组长]")) {
+        } else if (TEAMLEADER.equals(roleName)) {
             return "main1";
-        } else if (auth.getAuthorities().toString().equals("[ROLE_员工]")) {
+        } else if (STAFF.equals(roleName)) {
             return "main";
         } else {
             return "error";
