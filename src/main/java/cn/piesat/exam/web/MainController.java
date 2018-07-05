@@ -25,10 +25,10 @@ import java.util.List;
 @Log4j2
 public class MainController {
 
-    public static final String ADMIN = "管理员";
-    public static final String MANAGER = "总监";
-    public static final String TEAMLEADER = "组长";
-    public static final String STAFF = "员工";
+    private static final String ADMIN = "管理员";
+    private static final String MANAGER = "总监";
+    private static final String TEAMLEADER = "组长";
+    private static final String STAFF = "员工";
     @Autowired
     private DeptService deptService;
     @Autowired
