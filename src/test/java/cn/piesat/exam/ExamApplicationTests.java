@@ -1,7 +1,9 @@
 package cn.piesat.exam;
 
+import cn.piesat.exam.domain.PerformRules;
 import cn.piesat.exam.domain.Role;
 import cn.piesat.exam.domain.User;
+import cn.piesat.exam.mapper.PerformRulesMapper;
 import cn.piesat.exam.mapper.RoleMapper;
 import cn.piesat.exam.mapper.UserMapper;
 import org.junit.Assert;
@@ -26,10 +28,13 @@ public class ExamApplicationTests {
     @Autowired
     private RoleMapper roleMapper;
 
+    @Autowired
+    private PerformRulesMapper performRulesMapper;
+
     @Test
     public void contextLoads() {
         User e = userMapper.findUserById(7);
-        Assert.assertEquals("系统管理员", e.getName());
+        Assert.assertEquals("Admin", e.getName());
 
         User u = new User();
         u.setUsername("abcdefghi");
@@ -47,5 +52,15 @@ public class ExamApplicationTests {
         adminRole.setRoleName("ROLE_管理员");
         int i = roles.indexOf(adminRole);
         System.out.println("索引：" + i);
+    }
+
+    @Test
+    public void rulesMapper(){
+        PerformRules p = new PerformRules();
+        p.setType("ABC");
+        p.setKpi("xyz");
+        p.setRules("HHHHHH");
+        p.setWeight(10);
+        performRulesMapper.insert(p);
     }
 }
