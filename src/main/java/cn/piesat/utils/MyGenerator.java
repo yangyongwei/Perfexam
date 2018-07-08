@@ -1,4 +1,4 @@
-package cn.piesat.exam;
+package cn.piesat.utils;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
