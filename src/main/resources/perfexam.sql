@@ -11,7 +11,7 @@
  Target Server Version : 50612
  File Encoding         : 65001
 
- Date: 25/06/2018 11:06:14
+ Date: 08/07/2018 14:30:35
 */
 
 SET NAMES utf8mb4;
@@ -47,7 +47,7 @@ CREATE TABLE `dept_group`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `dept_id`(`dept_id`) USING BTREE,
   INDEX `group_id`(`group_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of dept_group
@@ -65,13 +65,26 @@ CREATE TABLE `group`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `id`(`id`) USING BTREE,
   INDEX `name`(`group_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of group
 -- ----------------------------
 INSERT INTO `group` VALUES (1, '测试组');
 INSERT INTO `group` VALUES (2, '美工组');
+
+-- ----------------------------
+-- Table structure for perform_rules
+-- ----------------------------
+DROP TABLE IF EXISTS `perform_rules`;
+CREATE TABLE `perform_rules`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `kpi` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `weight` int(11) NOT NULL,
+  `rules` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for role
@@ -108,13 +121,13 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `username`(`username`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (7, 'admin', '$2a$10$NLOmsCBSfOUzpucqcm7rj.mnkjDl9TY2kleIfLxMiPjfyehXOWxBS', '系统管理员', '男', NULL, NULL, NULL);
-INSERT INTO `user` VALUES (13, 'Luck', '$2a$10$cO7CJ81to4I1x7oEQXeXYOT1ryG8ivfESIYnlTMNK7Nz66KniWECO', '刘华清', NULL, '2018-06-24 09:44:55', NULL, NULL);
+INSERT INTO `user` VALUES (7, 'admin', '$2a$10$NLOmsCBSfOUzpucqcm7rj.mnkjDl9TY2kleIfLxMiPjfyehXOWxBS', 'Admin', '男', NULL, '2018-07-08 14:22:08', NULL);
+INSERT INTO `user` VALUES (8, 'luck', '$2a$10$UkJ3W3OM6y5YbY0GNLSB1.CmlxZpS.ijIXescjYOKYIzyHEfTuz5O', '杨永威', NULL, '2018-07-01 16:04:18', '2018-07-01 18:55:15', NULL);
 
 -- ----------------------------
 -- Table structure for user_dept_group
@@ -130,12 +143,12 @@ CREATE TABLE `user_dept_group`  (
   INDEX `dept_id`(`dept_id`) USING BTREE,
   INDEX `group_id`(`group_id`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user_dept_group
 -- ----------------------------
-INSERT INTO `user_dept_group` VALUES (4, 13, 6, NULL);
+INSERT INTO `user_dept_group` VALUES (1, 8, 1, 1);
 
 -- ----------------------------
 -- Table structure for user_role
@@ -149,12 +162,12 @@ CREATE TABLE `user_role`  (
   INDEX `user_id`(`user_id`) USING BTREE,
   INDEX `role_id`(`role_id`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES (6, 7, 4);
-INSERT INTO `user_role` VALUES (12, 13, 6);
+INSERT INTO `user_role` VALUES (7, 8, 6);
 
 SET FOREIGN_KEY_CHECKS = 1;
