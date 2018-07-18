@@ -43,7 +43,7 @@ public class GroupController {
     @GetMapping("/findGroupBy")
     public List<String> GroupListByDeptName(@RequestParam(value="deptName") String deptName)
     {
-        List<String> groupNames = new ArrayList();
+        List<String> groupNames = new ArrayList<>();
         Dept dept = deptService.findDeptByName(deptName);
         if(dept == null){
             return groupNames;
