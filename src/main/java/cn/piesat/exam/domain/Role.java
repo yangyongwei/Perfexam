@@ -20,4 +20,9 @@ public class Role {
         Role role = (Role) o;
         return roleName != null ? roleName.equals(role.roleName) : role.roleName == null;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
