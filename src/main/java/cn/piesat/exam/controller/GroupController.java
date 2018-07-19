@@ -25,21 +25,6 @@ public class GroupController {
     @Autowired
     private DeptGroupService deptGroupService;
 
-//    @GetMapping("/deptby")
-//    public List<String> GroupListByDeptId(@RequestParam(value="id") Integer id)
-//    {
-//        List<String> groupNames = new ArrayList();
-//        List<Integer>  groupIds = deptGroupService.findGroupIdsByDeptId(id);
-//        if(groupIds.isEmpty()){
-//            return groupNames;
-//        }
-//        List<Group> groupList = groupService.findGroupByIds(groupIds);
-//        for(Group group : groupList){
-//            groupNames.add(group.getGroupName());
-//        }
-//        return groupNames;
-//    }
-
     @GetMapping("/findGroupBy")
     public List<String> GroupListByDeptName(@RequestParam(value="deptName") String deptName)
     {
